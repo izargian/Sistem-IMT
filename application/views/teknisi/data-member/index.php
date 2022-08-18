@@ -3,6 +3,13 @@
 
     <div class="container-fluid py-4">
       <div class="row">
+          <div class="col-12">
+              <?= $this->session->flashdata('message'); ?>
+              <?= $this->session->flashdata('success'); ?>
+              <?= $this->session->flashdata('errors'); ?>
+          </div>
+      </div>
+      <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
@@ -72,7 +79,7 @@
                           <td class="align-middle text-center">
                             <a href="<?php echo site_url('teknisi/change/data_member_teknisi/detail_teknisi_member/' . $u->id); ?>" class="btn btn-link text-success text-gradient px-3 mb-0">Detail ⭢</a>
 
-                              <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="<?php echo site_url('teknisi/change/data_member_teknisi/delete_teknisi_member/' . $u->id); ?>"><i class="far fa-trash-alt me-2"></i></a>
+                              <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:void(0)" data-url="<?= site_url('teknisi/change/data_member_teknisi/delete_teknisi_member/' . $u->id); ?>" onclick="delete_member(this)" ><i class="far fa-trash-alt me-2"></i></a>
 
                               <a class="btn btn-link text-primary px-3 mb-0" href="<?php echo site_url('teknisi/change/data_member_teknisi/update_teknisi_member/' . $u->id); ?>"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i></a>
                           </td>
@@ -93,4 +100,49 @@
         </div>
       </div>
 
-      
+  <script>
+    function delete_member(el) {
+      let url = $(el).data('url');
+      Swal.fire({
+        title: 'Peringatan',
+        text: "Apakah Anda Ingin Menghapus?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "YA",
+        cancelButtonText: "BATAL",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            cache: "false",
+            success: function(response) {
+              console.log(response)
+              Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              }).then(function() {
+                location.reload();
+              })
+            },
+            error: function(response) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Error',
+                text: response.responseJSON.message,
+                showConfirmButton: false,
+                dangerMode: true,
+                timer: 2000
+              });
+            }
+          });
+        }
+        return false;
+      });
+    }
+  </script>

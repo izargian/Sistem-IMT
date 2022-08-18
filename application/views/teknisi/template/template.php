@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.0/dist/sweetalert2.all.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 
@@ -313,6 +314,30 @@
       </script>
     <?php endif; ?>
 
+    <?php if ($this->session->flashdata('error-insert')) : ?>
+      <script>
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Data gagal ditambah!',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error-update')) : ?>
+      <script>
+        Swal.fire({
+          icon: 'error',
+          title: 'Gagal',
+          text: 'Data gagal ditambah!',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
+
     <?php if ($this->session->flashdata('success-edit-profil')) : ?>
       <script>
         Swal.fire({
@@ -473,19 +498,20 @@
   </script>
   <script>
     $('.custom-file-input').on('change', function() {
-      let fileName = $(this).val().split('\\').pop();
-      $(this).next('.custom-file-label').addClass("selected").html(fileName);
-    });
-
+            let fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+        });
+        
     $(document).ready(function() {
-      $('#example').DataTable();
-    });
+            $('#example').DataTable();
+        });
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= base_url('assets/') ?>js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 
+  
 </body>
 
 </html>

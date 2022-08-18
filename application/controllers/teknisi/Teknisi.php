@@ -32,7 +32,7 @@ class Teknisi extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $this->db->select('*');
+        $this->db->select('data-imt.id, data-imt.tinggi_badan, data-imt.berat_badan, data-imt.usia, data-imt.created, member.id_rfid, member.nama, member.jenis_kelamin');
         $this->db->from('data-imt');
         $this->db->join('member', 'data-imt.id_member=member.id');
         $data_imt = $this->db->get();
@@ -79,7 +79,7 @@ class Teknisi extends CI_Controller {
         $this->session->userdata('email')])->row_array();
 
         $data['data_member'] = $this->m_imt->tampil_data_member()->result();
-
+        
         $data['view'] = 'teknisi/data-member/index';
 
         $this->load->view('teknisi/template/template', $data);

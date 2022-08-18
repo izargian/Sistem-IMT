@@ -80,7 +80,7 @@ class Data_imt_teknisi extends CI_Controller {
         // redirect('admin/admin/data_imt_teknisi');
 
         $this->db->delete('data-imt', array('id' => $id)); 
-        if ($this->db->_error_message()) {
+        if ($this->db->error()) {
             return $this->output->set_content_type('application/json')
                     ->set_status_header(200)
                     ->set_output(json_encode([

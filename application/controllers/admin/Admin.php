@@ -36,7 +36,7 @@ class Admin extends CI_Controller {
         $this->db->join('member', 'data-imt.id_member=member.id');
         $data_imt = $this->db->get();
         $data['data_imt'] = $data_imt->result();
-        // echo json_encode($data['data_imt']);
+        
         $data['view'] = 'admin/data-imt/index';
 
         $this->load->view('admin/template/template', $data);

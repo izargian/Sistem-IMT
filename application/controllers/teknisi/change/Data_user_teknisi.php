@@ -133,6 +133,8 @@ class Data_user_teknisi extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
+        $data['instansi'] = $this->db->get('instansi')->result();
+
         $data['view'] = 'teknisi/data-user/tambah_teknisi_user';
 
         $this->load->view('teknisi/template/template', $data);

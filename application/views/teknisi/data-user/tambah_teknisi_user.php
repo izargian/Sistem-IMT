@@ -31,9 +31,13 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                         <label for="nama_file" class="label-font-register">Instansi</label>
-                        <input type="text" class="form-control" autocomplete="off" name="alamat" id="nama_file" placeholder="Dari Instasi apa .." required>
+                        <select name="code_instansi" id="" class="form-control">
+                          <option selected disabled>-- Pilih Instansi --</option>
+                          <?php foreach ($instansi as $value) : ?>
+                            <option value="<?= $value->code_instansi ?>"><?= $value->instansi ?><option>                          
+                          <?php endforeach ?>
+                        </select>
                         <?= form_error('Nama_file', '<small class="text-danger">', '</small>'); ?>
-
                     </div>
                       </div>
                       <div class="col-sm-6">
