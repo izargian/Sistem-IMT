@@ -31,12 +31,14 @@ class Admin extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['data_imt'] = $this->m_imt->tampil_data()->result();
-
+        $this->db->select('data-imt.id, data-imt.tinggi_badan, data-imt.berat_badan, data-imt.usia, data-imt.created, member.id_rfid, member.nama, member.jenis_kelamin');
+        $this->db->from('data-imt');
+        $this->db->join('member', 'data-imt.id_member=member.id');
+        $data_imt = $this->db->get();
+        $data['data_imt'] = $data_imt->result();
+        // echo json_encode($data['data_imt']);
         $data['view'] = 'admin/data-imt/index';
 
         $this->load->view('admin/template/template', $data);
-    }
-
-   
+    }   
 }
