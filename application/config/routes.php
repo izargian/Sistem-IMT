@@ -53,7 +53,7 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Api route
+// Api
 $route['api/v1/berat-badan'] = 'api/BeratBadan';
 $route['api/v1/tinggi-badan'] = 'api/TinggiBadan';
 $route['api/v1/rfid'] = 'api/Rfid';

@@ -231,7 +231,6 @@
                         $this->load->view($view);
                     ?>
 
-
     <?php if ($this->session->flashdata('gagal')) : ?>
                 <script>
                     Swal.fire({
