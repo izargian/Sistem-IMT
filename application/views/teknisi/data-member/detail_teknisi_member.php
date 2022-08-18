@@ -87,7 +87,6 @@
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">T B</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">rfid</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
 
               </tr>
             </thead>
@@ -100,9 +99,6 @@
                   <td><?= $value->tinggi_badan ?></td>
                   <td><?= $value->created ?></td>
                   <td><?= $value->id_rfid ?></td>
-                  <td>
-                    tombol
-                  </td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -148,9 +144,9 @@
           categories: response.tanggal
         }
       };
-  
+
       var chart = new ApexCharts(document.querySelector("#chart"), options);
-  
+
       chart.render();
     });
 
