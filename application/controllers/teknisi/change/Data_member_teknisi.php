@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Data_member_teknisi extends CI_Controller {
+class Data_member_teknisi extends CI_Controller
+{
 
     public function __construct()
     {
@@ -65,7 +66,7 @@ class Data_member_teknisi extends CI_Controller {
         $this->load->model('m_imt');
 
         $where = array('id' => $id);
-        
+
         $this->load->model('m_imt');
         $data['data_instansi'] = $this->m_imt->tampil_data_instansi()->result();
 
@@ -115,28 +116,28 @@ class Data_member_teknisi extends CI_Controller {
         $cek = $this->db->get_where('data-imt', array('id_member' => $id));
         if ($cek->num_rows() > 0) {
             return $this->output->set_content_type('application/json')
-                    ->set_status_header(500)
-                    ->set_output(json_encode([
-                        'status' => 'error',
-                        'message' => 'Data member masih digunakan di Data IMT!'
-                    ]));
+                ->set_status_header(500)
+                ->set_output(json_encode([
+                    'status' => 'error',
+                    'message' => 'Data member masih digunakan di Data IMT!'
+                ]));
         }
 
-        $this->db->delete('member', array('id' => $id)); 
+        $this->db->delete('member', array('id' => $id));
         if ($this->db->error()) {
             return $this->output->set_content_type('application/json')
-                    ->set_status_header(200)
-                    ->set_output(json_encode([
-                        'status' => 'success',
-                        'message' => 'Data berhasil dihapus'
-                    ]));
-        }else{
+                ->set_status_header(200)
+                ->set_output(json_encode([
+                    'status' => 'success',
+                    'message' => 'Data berhasil dihapus'
+                ]));
+        } else {
             return $this->output->set_content_type('application/json')
-                    ->set_status_header(500)
-                    ->set_output(json_encode([
-                        'status' => 'error',
-                        'message' => 'Data gagal dihapus'
-                    ]));
+                ->set_status_header(500)
+                ->set_output(json_encode([
+                    'status' => 'error',
+                    'message' => 'Data gagal dihapus'
+                ]));
         }
     }
 
@@ -200,9 +201,8 @@ class Data_member_teknisi extends CI_Controller {
             [
                 'jenis_kelamin' => 'Perempuan',
             ],
-            
+
         ];
         return $jenis_kelamin;
     }
-
 }

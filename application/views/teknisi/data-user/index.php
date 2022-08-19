@@ -35,7 +35,7 @@
                     $no = 1;
                     foreach ($data_user as $u) {
 
-                      $instansi = $this->db->get_where('instansi', array('code_instansi' => $u->code_instansi))->row();
+                      $instansi = $this->db->get_where('instansi', array('id' => $u->code_instansi))->row();
                     ?>
                       <tr>
                         <td>
@@ -45,7 +45,11 @@
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
-                              <img class="avatar avatar-sm me-3" height="40px" width="40px" src="<?= base_url() . 'assets/profile_picture/' . $u->photo; ?>">
+                              <?php if ($u->photo == null) : ?>
+                                <img class="avatar avatar-sm me-3" height="40px" width="40px" src="<?= base_url() . 'assets/profile_picture/default.png' ?>">
+                              <?php else : ?>
+                                <img class="avatar avatar-sm me-3" height="40px" width="40px" src="<?= base_url() . 'assets/profile_picture/' . $u->photo; ?>">
+                              <?php endif ?>
                             </div>
 
                             <div class="d-flex flex-column justify-content-center">
@@ -70,7 +74,7 @@
 
                         <td class="align-middle text-center">
 
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="<?php echo site_url('teknisi/change/data_user_teknisi/delete_teknisi_user/' . $u->id); ?>"><i class="far fa-trash-alt me-2"></i></a>
+                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:void(0)" data-url="<?php echo site_url('teknisi/change/data_user_teknisi/delete_teknisi_user/' . $u->id); ?>" onclick="hapus(this)"> <i class="far fa-trash-alt me-2"></i></a>
 
                           <a class="btn btn-link text-primary px-3 mb-0" href="<?php echo site_url('teknisi/change/data_user_teknisi/update_teknisi_user/' . $u->id); ?>"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i></a>
                         </td>
@@ -90,3 +94,50 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function hapus(el) {
+      let url = $(el).data('url');
+      Swal.fire({
+        title: 'Peringatan',
+        text: "Apakah Anda Ingin Menghapus?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "YA",
+        cancelButtonText: "BATAL",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            cache: "false",
+            success: function(response) {
+              console.log(response)
+              Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              }).then(function() {
+                location.reload();
+              })
+            },
+            error: function(response) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Error',
+                text: response.responseJSON.message,
+                showConfirmButton: false,
+                dangerMode: true,
+                timer: 2000
+              });
+            }
+          });
+        }
+        return false;
+      });
+    }
+  </script>

@@ -69,7 +69,7 @@
 
                         <td class="align-middle text-center">
 
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="<?php echo site_url('teknisi/change/data_instansi_teknisi/delete_teknisi_instansi/' . $u->id); ?>"><i class="far fa-trash-alt me-2"></i></a>
+                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:void(0)" data-url="<?php echo site_url('teknisi/change/data_instansi_teknisi/delete_teknisi_instansi/' . $u->id); ?>" onclick="hapus(this)"><i class="far fa-trash-alt me-2"></i></a>
 
                           <a class="btn btn-link text-primary px-3 mb-0" href="<?php echo site_url('teknisi/change/data_instansi_teknisi/update_teknisi_instansi/' . $u->id); ?>"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i></a>
                         </td>
@@ -89,3 +89,50 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function hapus(el) {
+      let url = $(el).data('url');
+      Swal.fire({
+        title: 'Peringatan',
+        text: "Apakah Anda Ingin Menghapus?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "YA",
+        cancelButtonText: "BATAL",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            cache: "false",
+            success: function(response) {
+              console.log(response)
+              Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              }).then(function() {
+                location.reload();
+              })
+            },
+            error: function(response) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Error',
+                text: response.responseJSON.message,
+                showConfirmButton: false,
+                dangerMode: true,
+                timer: 2000
+              });
+            }
+          });
+        }
+        return false;
+      });
+    }
+  </script>

@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Data_instansi_teknisi extends CI_Controller {
+class Data_instansi_teknisi extends CI_Controller
+{
 
     public function __construct()
     {
@@ -73,17 +74,47 @@ class Data_instansi_teknisi extends CI_Controller {
 
     public function delete_teknisi_instansi($id)
     {
-        $this->load->model('m_imt');
-        $where = array('id' => $id);
-        $this->m_imt->delete_imt($where, 'instansi');
-        $this->session->set_flashdata('imt-delete', 'berhasil');
-        redirect('teknisi/teknisi/data_instansi_teknisi');
+        $cek_member = $this->db->get_where('member', array('code_instansi' => $id));
+        $cek_user = $this->db->get_where('user', array('code_instansi' => $id));
+        if ($cek_member->num_rows() > 0) {
+            return $this->output->set_content_type('application/json')
+                ->set_status_header(500)
+                ->set_output(json_encode([
+                    'status' => 'error',
+                    'message' => 'Data instansi masih digunakan oleh member/user!'
+                ]));
+        }elseif($cek_user->num_rows() > 0){
+            return $this->output->set_content_type('application/json')
+                ->set_status_header(500)
+                ->set_output(json_encode([
+                    'status' => 'error',
+                    'message' => 'Data instansi masih digunakan oleh member/user!'
+                ]));
+        }else{
+            $this->db->delete('instansi', array('id' => $id));
+            if ($this->db->error()) {
+                return $this->output->set_content_type('application/json')
+                    ->set_status_header(200)
+                    ->set_output(json_encode([
+                        'status' => 'success',
+                        'message' => 'Data berhasil dihapus'
+                    ]));
+            } else {
+                return $this->output->set_content_type('application/json')
+                    ->set_status_header(500)
+                    ->set_output(json_encode([
+                        'status' => 'error',
+                        'message' => 'Data gagal dihapus'
+                    ]));
+            }
+        }
+
     }
 
 
     public function tambah_teknisi_instansi()
     {
-        
+
         $this->form_validation->set_rules('instansi', 'Instansi', 'required|trim', [
             'required' => 'Harap isi kolom nama.',
         ]);
@@ -96,14 +127,13 @@ class Data_instansi_teknisi extends CI_Controller {
 
         if ($this->form_validation->run() == false) {
 
-            
-        $data['user'] = $this->db->get_where('user', ['email' =>
-        $this->session->userdata('email')])->row_array();
 
-        $data['view'] = 'teknisi/data-instansi/tambah_teknisi_instansi';
+            $data['user'] = $this->db->get_where('user', ['email' =>
+            $this->session->userdata('email')])->row_array();
 
-        $this->load->view('teknisi/template/template', $data);
+            $data['view'] = 'teknisi/data-instansi/tambah_teknisi_instansi';
 
+            $this->load->view('teknisi/template/template', $data);
         } else {
             // $image = $_FILES['photo']['name'];
             $data = [
@@ -111,25 +141,25 @@ class Data_instansi_teknisi extends CI_Controller {
                 'code_instansi' => htmlspecialchars($this->input->post('code_instansi', true)),
                 'alamat' => htmlspecialchars($this->input->post('alamat', true)),
                 // 'photo' => htmlspecialchars($image),
-                
+
             ];
 
-        //     $config['allowed_types'] = 'jpg|png|jpeg';
-        // $config['max_size'] = '9096';
-        // $config['upload_path'] = './assets/profile_picture';
+            //     $config['allowed_types'] = 'jpg|png|jpeg';
+            // $config['max_size'] = '9096';
+            // $config['upload_path'] = './assets/profile_picture';
 
-        // $this->load->library('upload', $config);
-        // if ( ! $this->upload->do_upload('photo')) {
-           
-            
-        //     $gambarBaru = $this->upload->data('file_name');
-        //     $this->db->set('photo', $gambarBaru);
-        // } else {
-        //     echo $this->db->set('photo', 'default.png');
-        // }
+            // $this->load->library('upload', $config);
+            // if ( ! $this->upload->do_upload('photo')) {
+
+
+            //     $gambarBaru = $this->upload->data('file_name');
+            //     $this->db->set('photo', $gambarBaru);
+            // } else {
+            //     echo $this->db->set('photo', 'default.png');
+            // }
 
             $this->db->insert('instansi', $data);
-           
+
             $this->session->set_flashdata('success-upload', 'berhasil');
             redirect(base_url('teknisi/teknisi/data_instansi_teknisi'));
         }

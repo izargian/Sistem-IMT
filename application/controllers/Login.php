@@ -28,7 +28,7 @@ class Login extends CI_Controller
             // $this->userlogin();
 
             $email = $this->input->post('email');
-            $password = $this->input->post('password');
+            $password = md5($this->input->post('password'));
 
             $user = $this->db->get_where('user', ['email' => $email, 'password' => $password])->row_array();
 
@@ -36,6 +36,7 @@ class Login extends CI_Controller
 
             if ($user) {
                 $data = [
+                    'id' => $user['id'],
                     'nama' => $user['nama'],
                     'email' => $user['email'],
                     'jenis' => $user['jenis'],
@@ -64,7 +65,7 @@ class Login extends CI_Controller
                 //     redirect(base_url('welcome/user'));
                 // }
             } else {
-                $this->session->set_flashdata('fail-login', 'Email atau password anda tidak sesuai!');
+                $this->session->set_flashdata('login-gagal', 'Email atau password anda tidak sesuai!');
                 redirect(base_url('login'));
             }
         }

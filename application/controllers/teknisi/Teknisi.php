@@ -50,10 +50,9 @@ class Teknisi extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['data_user'] = $this->m_imt->tampil_data_user()->result();
+        $data['data_user'] = $this->db->get_where('user', array('id !=' => $this->session->userdata('id')))->result();
 
         $data['view'] = 'teknisi/data-user/index';
-
         $this->load->view('teknisi/template/template', $data);
     }
     

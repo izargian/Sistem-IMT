@@ -181,7 +181,7 @@
         </li> -->
 
         <li class="nav-item">
-          <a class="nav-link  " href="<?= base_url('login/logout') ?>">
+          <a class="nav-link  " href="javascript:void(0)" onclick="logout()">
             <div class="icon  icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -234,7 +234,8 @@
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?= $user['jenis'] ?></li>
           </ol>
           <?php
-          $instansi = $this->db->get_where('instansi', array('code_instansi' => $user['code_instansi']))->row();
+          $instansi = $this->db->get_where('instansi', array('id' => $user['code_instansi']))->row();
+          var_dump($user['code_instansi'])
           ?>
           <h3 class="font-weight-bolder mb-0"><?= $user['jenis'] ?> <span class="h6 mx-3"><?= $instansi->instansi ?></span></h3>
         </nav>
@@ -247,11 +248,36 @@
           </div>
 
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none"><?= $user['nama'] ?></span>
               </a>
+              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="">
+                  <a class="dropdown-item border-radius-md" href="<?php echo site_url('teknisi/change/data_user_teknisi/update_teknisi_user/' .  $user['id']); ?>">
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold"><i class="fa fa-user me-sm-1"></i> Edit Profil</span>
+                        </h6>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="">
+                  <a class="dropdown-item border-radius-md" href="javascript:void(0)" onclick="logout()">
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1 text-danger">
+                          <span class="font-weight-bold"><i class="fa fa-sign-out me-sm-1"></i> Log Out</span>
+                        </h6>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -488,6 +514,32 @@
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
   <script>
+    function logout() {
+      let url = '<?= base_url('login/logout') ?>';
+      Swal.fire({
+        title: 'Peringatan',
+        text: "Apakah Anda Ingin Keluar?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "YA",
+        cancelButtonText: "BATAL",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            cache: "false",
+            success: function(response) {
+              window.location = "<?= base_url() ?>";
+            },
+          })
+        }
+      })
+    }
+  </script>
+  <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
       var options = {
@@ -498,20 +550,20 @@
   </script>
   <script>
     $('.custom-file-input').on('change', function() {
-            let fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(fileName);
-        });
-        
+      let fileName = $(this).val().split('\\').pop();
+      $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+
     $(document).ready(function() {
-            $('#example').DataTable();
-        });
+      $('#example').DataTable();
+    });
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= base_url('assets/') ?>js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 
-  
+
 </body>
 
 </html>
