@@ -32,11 +32,11 @@
                         <div class="form-group">
                         <label for="code_instansi">Instansi</label>
                             <select class="form-control" name="code_instansi" id="code_instansi">
-                              <?php foreach ($data_instansi as $instansi) : ?>
-                                <?php if ($data_member->code_instansi == $instansi->id) : ?>
-                                  <option value="<?php echo $data_member->id ?>" selected><?php echo $instansi->instansi ?></option>
-                                <?php else : ?> 
-                                  <option value="<?php echo $instansi->id ?>"><?php echo $instansi->instansi ?></option>
+                              <?php foreach ($instansi as $instansis) : ?>
+                                <?php if ($data_member->code_instansi == $instansis->id) : ?>
+                                  <option value="<?php echo $instansis->id ?>" selected><?php echo $instansis->instansi ?></option>
+                                <?php else : ?>
+                                  <option value="<?php echo $instansis->id ?>"><?php echo $instansis->instansi ?></option>
                                 <?php endif ?>
                               <?php endforeach ?>
                             </select>

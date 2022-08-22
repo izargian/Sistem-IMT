@@ -18,12 +18,19 @@ class Data_member_teknisi extends CI_Controller
     public function detail_teknisi_member($id)
     {
         $this->load->model('m_imt');
-        $where = array('id' => $id);
         $detail = $this->m_imt->detail_member($id)->row();
         $data['detail'] = $detail;
 
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+
+        // select data imt berdasarkan member
+        $this->db->select('*');
+        $this->db->from('data-imt');
+        $this->db->join('member', 'data-imt.id_member=member.id');
+        $this->db->where('data-imt.id_member', $id);
+        $data_imt = $this->db->get();
+        $data['data_imt'] = $data_imt->result();
 
         $data['view'] = 'petugas/data-member/detail_teknisi_member';
 
@@ -36,7 +43,7 @@ class Data_member_teknisi extends CI_Controller
         $this->load->model('m_imt');
 
         $this->load->model('m_imt');
-        $data['data_instansi'] = $this->m_imt->tampil_data_instansi()->result();
+        $data['instansi'] = $this->db->get('instansi')->result();
 
         $data['jenis_kelamin'] = $this->jenis_kelamin();
 
@@ -45,8 +52,8 @@ class Data_member_teknisi extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
-        $data['view'] = 'teknisi/data-member/update_teknisi_member';
-        $this->load->view('teknisi/template/template', $data);
+        $data['view'] = 'petugas/data-member/update_teknisi_member';
+        $this->load->view('petugas/template/template', $data);
     }
 
     public function edit_teknisi_member()
