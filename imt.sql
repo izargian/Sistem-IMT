@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Agu 2022 pada 09.56
--- Versi server: 10.4.19-MariaDB
--- Versi PHP: 7.4.20
+-- Generation Time: Aug 22, 2022 at 08:03 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `data-imt`
+-- Table structure for table `data-imt`
 --
 
 CREATE TABLE `data-imt` (
@@ -37,7 +37,7 @@ CREATE TABLE `data-imt` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `data-imt`
+-- Dumping data for table `data-imt`
 --
 
 INSERT INTO `data-imt` (`id`, `id_member`, `tinggi_badan`, `berat_badan`, `usia`, `created`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `data-imt` (`id`, `id_member`, `tinggi_badan`, `berat_badan`, `usia`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `instansi`
+-- Table structure for table `instansi`
 --
 
 CREATE TABLE `instansi` (
@@ -61,7 +61,7 @@ CREATE TABLE `instansi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `instansi`
+-- Dumping data for table `instansi`
 --
 
 INSERT INTO `instansi` (`id`, `instansi`, `alamat`, `code_instansi`) VALUES
@@ -74,7 +74,7 @@ INSERT INTO `instansi` (`id`, `instansi`, `alamat`, `code_instansi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `member`
+-- Table structure for table `member`
 --
 
 CREATE TABLE `member` (
@@ -87,7 +87,7 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `member`
+-- Dumping data for table `member`
 --
 
 INSERT INTO `member` (`id`, `id_rfid`, `nama`, `jenis_kelamin`, `tgl_lahir`, `code_instansi`) VALUES
@@ -100,7 +100,7 @@ INSERT INTO `member` (`id`, `id_rfid`, `nama`, `jenis_kelamin`, `tgl_lahir`, `co
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengukuran`
+-- Table structure for table `pengukuran`
 --
 
 CREATE TABLE `pengukuran` (
@@ -112,7 +112,7 @@ CREATE TABLE `pengukuran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pengukuran`
+-- Dumping data for table `pengukuran`
 --
 
 INSERT INTO `pengukuran` (`id`, `uid_biodata`, `tinggi_badan`, `berat_badan`, `tgljam_ukur`) VALUES
@@ -121,7 +121,7 @@ INSERT INTO `pengukuran` (`id`, `uid_biodata`, `tinggi_badan`, `berat_badan`, `t
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengukuran_berat_badan`
+-- Table structure for table `pengukuran_berat_badan`
 --
 
 CREATE TABLE `pengukuran_berat_badan` (
@@ -131,7 +131,7 @@ CREATE TABLE `pengukuran_berat_badan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pengukuran_berat_badan`
+-- Dumping data for table `pengukuran_berat_badan`
 --
 
 INSERT INTO `pengukuran_berat_badan` (`id`, `value`, `date`) VALUES
@@ -144,7 +144,7 @@ INSERT INTO `pengukuran_berat_badan` (`id`, `value`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengukuran_tinggi_badan`
+-- Table structure for table `pengukuran_tinggi_badan`
 --
 
 CREATE TABLE `pengukuran_tinggi_badan` (
@@ -154,7 +154,7 @@ CREATE TABLE `pengukuran_tinggi_badan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `pengukuran_tinggi_badan`
+-- Dumping data for table `pengukuran_tinggi_badan`
 --
 
 INSERT INTO `pengukuran_tinggi_badan` (`id`, `value`, `date`) VALUES
@@ -163,7 +163,7 @@ INSERT INTO `pengukuran_tinggi_badan` (`id`, `value`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `rfid`
+-- Table structure for table `rfid`
 --
 
 CREATE TABLE `rfid` (
@@ -172,7 +172,7 @@ CREATE TABLE `rfid` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `rfid`
+-- Dumping data for table `rfid`
 --
 
 INSERT INTO `rfid` (`id`, `value`) VALUES
@@ -184,7 +184,7 @@ INSERT INTO `rfid` (`id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -199,7 +199,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `nama`, `jenis`, `email`, `password`, `alamat`, `code_instansi`, `photo`) VALUES
@@ -218,103 +218,103 @@ INSERT INTO `user` (`id`, `nama`, `jenis`, `email`, `password`, `alamat`, `code_
 --
 
 --
--- Indeks untuk tabel `data-imt`
+-- Indexes for table `data-imt`
 --
 ALTER TABLE `data-imt`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `instansi`
+-- Indexes for table `instansi`
 --
 ALTER TABLE `instansi`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `code` (`code_instansi`);
 
 --
--- Indeks untuk tabel `member`
+-- Indexes for table `member`
 --
 ALTER TABLE `member`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengukuran`
+-- Indexes for table `pengukuran`
 --
 ALTER TABLE `pengukuran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengukuran_berat_badan`
+-- Indexes for table `pengukuran_berat_badan`
 --
 ALTER TABLE `pengukuran_berat_badan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengukuran_tinggi_badan`
+-- Indexes for table `pengukuran_tinggi_badan`
 --
 ALTER TABLE `pengukuran_tinggi_badan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `rfid`
+-- Indexes for table `rfid`
 --
 ALTER TABLE `rfid`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `data-imt`
+-- AUTO_INCREMENT for table `data-imt`
 --
 ALTER TABLE `data-imt`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `instansi`
+-- AUTO_INCREMENT for table `instansi`
 --
 ALTER TABLE `instansi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `member`
+-- AUTO_INCREMENT for table `member`
 --
 ALTER TABLE `member`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `pengukuran`
+-- AUTO_INCREMENT for table `pengukuran`
 --
 ALTER TABLE `pengukuran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `pengukuran_berat_badan`
+-- AUTO_INCREMENT for table `pengukuran_berat_badan`
 --
 ALTER TABLE `pengukuran_berat_badan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `pengukuran_tinggi_badan`
+-- AUTO_INCREMENT for table `pengukuran_tinggi_badan`
 --
 ALTER TABLE `pengukuran_tinggi_badan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `rfid`
+-- AUTO_INCREMENT for table `rfid`
 --
 ALTER TABLE `rfid`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
