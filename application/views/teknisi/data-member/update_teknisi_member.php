@@ -25,7 +25,7 @@
                       <div class="col-sm-6">
                         <div class="form-group">
                           <label for="id_rfid" class="label-font-register">No ID Kartu Member</label>
-                          <input type="number" class="form-control" autocomplete="off" name="id_rfid" id="id_rfid" placeholder="No ID kartu member .." value="<?= $data_member->id_rfid ?>" readonly required>
+                          <input type="text" class="form-control" autocomplete="off" name="id_rfid" id="id_rfid" placeholder="No ID kartu member .." value="<?= $data_member->id_rfid ?>" readonly required>
                         </div>
                       </div>
                       <div class="col-sm-6">
