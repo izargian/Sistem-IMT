@@ -65,13 +65,13 @@
                         <td>
                           <?php
                           if (round($bmi, 2) < 18) {
-                            echo '<b>Kurus</b> <br> <a href="#">Lihat saran</a>';
+                            echo '<b>Kurus</b> <br> <a href="#">Input Saran</a>';
                           } elseif (round($bmi, 2) >= 18 && round($bmi, 2) <= 25) {
-                            echo '<b>Normal</b> <br> <a href="#">Lihat saran</a>';
+                            echo '<b>Normal</b> <br> <a href="#">Input Saran</a>';
                           } elseif (round($bmi, 2) > 25 && round($bmi, 2) < 27) {
-                            echo '<b>Kegemukan</b> <br> <a href="#">Lihat saran</a>';
+                            echo '<b>Kegemukan</b> <br> <a href="#">Input Saran</a>';
                           } else {
-                            echo '<b>Obesitas</b> <br> <a href="#">Lihat saran</a>';
+                            echo '<b>Obesitas</b> <br> <a href="#">Input Saran</a>';
                           }
                           ?>
                         </td>

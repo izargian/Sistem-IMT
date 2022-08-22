@@ -7,103 +7,77 @@
             <div class="card-header pb-0">
               <div class="row">
                 <div class="col-6">
-                <h3 class="justify-content-start">Update Data User</h3>
-              </div>
-
-              <div class="col-6">
-                <a class="btn bg-gradient-primary  w-100 justify-content-end" href="<?= base_url('teknisi/tambah_teknisi_imt') ?>" type="button">Tambah Data User +</a>
+                <h3 class="justify-content-start">Ubah Member</h3>
               </div>
               </div>
             </div>
             <div class="card-body  pb-2">
-              <form action="<?= base_url('petugas/change/data_member_teknisi/edit_teknisi_member') ?>" enctype="multipart/form-data" method="post">
-                <?php foreach ($data_member as $u) { ?>
-                    <!-- <div class="">
-                        <div class="hero text-white hero-bg-image" data-background="<?= base_url('assets/') ?>stisla-assets/img/unsplash/eberhard-grossgasteiger-1207565-unsplash.jpg">
-                            <div class="col-md-4 mx-auto rounded-circle bg-white p-3" style="border-radius:3px;box-shadow:rgba(0, 0, 0, 0.03) 0px 4px 8px 0px;">
-                                <img src="<?= base_url() . 'assets/profile_picture/' . $u->photo; ?>" class="card-img-top  rounded-circle img-responsive" alt="...">
-                            </div>
-                            <div class="input-group mt-3 mx-auto" style="width: 50%;">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                                </div>
-                                <div class="custom-file mb-5">
-                                  <input type="file" class="custom-file-input" id="image" name="photo" aria-describedby="inputGroupFileAddon01">
-                                  <label class="custom-file-label" for="inputGroupFile01"></label>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-                    <br>
-                    <div id="detail" class="col-md-12 bg-white p-3" style="border-radius:3px;box-shadow:rgba(0, 0, 0, 0.03) 0px 4px 8px 0px;">
-                        <h1 class="font-weight-bold card-title text-center" style="color: black;">Update Data
-                            User
-                        </h1>
-                        <p class="text-center my-4" style="line-height: 5px;">Silahkan isi data dibawah untuk update
-                        data, dan upload file diatas untuk update data profile picture</p>
-                        <hr>
-                        <div class="form-group">
-                            <input type="hidden" name="id" value="<?= $u->id ?>">
-                            <!-- <input type="hidden" name="tgl_upload" value="<?= $u->tgl_upload ?>"> -->
-                            
-                            <label for="nim" class="font-weight-bold" style="font-size: 20px;">Nama</label>
-                            <input type=" text" class="form-control" id="nim" aria-describedby="emailHelp" required name="nama" value="<?= $u->nama ?>">
-                        </div>
-                        <!-- <div class="form-group">
-                            <label for="nama_prestasi" class="font-weight-bold" style="font-size: 20px;">Email</label>
-                            <input type="text" class="form-control" name="email" value="<?= $u->email ?>" id="nama_prestasi">
-                        </div> -->
-                        <div class="row">
-                          <div class="col-sm-6">
-                            <div class="form-group">
-                            <label for="nama_file" class="font-weight-bold" style="font-size: 20px;">No ID Kartu Member</label>
-                            <input type="text" class="form-control" name="uid" value="<?= $u->uid ?>" id="nama_file">
-                        </div>
-                      </div>
-                      <div class="col-sm-6">
-                            <div class="form-group">
-                              <label for="exampleFormControlSelect1" class="font-weight-bold text-sm">Instansi</label>
-                              <select class="form-control" name="code_instansi" id="exampleFormControlSelect1">
-                        <?php
-
-                        $instansi = $this->db->get_where('instansi', array('code_instansi' => $u->code_instansi))->row();                                
-                      ?>
-                        
-                        <option value="<?php echo $u->code_instansi ?>"><?php echo $instansi->instansi ?></option>
-                        
-                      </select>
-                            </div>
-
-                          </div>
-                        </div>
-                        <div class="row">
-                      <div class="col-sm-6">
-                        <div class="form-group">
-                      <label for="exampleFormControlSelect1">Jenis Kelamin</label>
-                      <select class="form-control" name="jenis_kelamin" id="exampleFormControlSelect1">
-                        <option >Choose ..</option>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                      </select>
+              <?php echo form_open_multipart('petugas/change/data_member_teknisi/edit_teknisi_member'); ?>
+              <input type="hidden" name="id" value="<?= $data_member->id ?>">
+                    <div class="form-group ">
+                      <label for="nama_prestasi" class="label-font-register">Nama</label>
+                      <input type="Text" class="form-control" name="nama" id="nama_prestasi" value="<?= $data_member->nama ?>" placeholder="Nama Lengkap ..  " required="">
+                      <?= form_error('Nama_prestasi', '<small class="text-danger">', '</small>'); ?>
                     </div>
                     
-                  </div>
-                  <div class="col-sm-6">
+                            
+                    <div class="row">
+                      <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="nama_file" class="label-font-register">Tanggal Lahir</label>
-                            <input type="date" class="form-control" name="tgl_lahir" id="nama_file" placeholder="Tanggal Lahir .." value="<?= $u->tgl_lahir ?>">
-      
+                          <label for="id_rfid" class="label-font-register">No ID Kartu Member</label>
+                          <input type="text" class="form-control" autocomplete="off" name="id_rfid" id="id_rfid" placeholder="No ID kartu member .." value="<?= $data_member->id_rfid ?>" readonly required>
                         </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                        <label for="code_instansi">Instansi</label>
+                            <select class="form-control" name="code_instansi" id="code_instansi">
+                              <?php foreach ($data_instansi as $instansi) : ?>
+                                <?php if ($data_member->code_instansi == $instansi->id) : ?>
+                                  <option value="<?php echo $data_member->id ?>" selected><?php echo $instansi->instansi ?></option>
+                                <?php else : ?> 
+                                  <option value="<?php echo $instansi->id ?>"><?php echo $instansi->instansi ?></option>
+                                <?php endif ?>
+                              <?php endforeach ?>
+                            </select>
 
+                        </div>
                       </div>
                     </div>
-                        <input type="submit" value="Update ⭢" class="btn btn-success btn-block">
+                    
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect1">Jenis Kelamin</label>
+                          <select class="form-control" name="jenis_kelamin" id="exampleFormControlSelect1">
+                              <?php
+                                foreach ($jenis_kelamin as $jk) : 
+                              ?>
+                                <?php if ($data_member->jenis_kelamin == $jk['jenis_kelamin']) : ?>
+                                  <option value="<?php echo $data_member->jenis_kelamin ?>" selected><?php echo $data_member->jenis_kelamin ?></option>
+                                <?php else : ?> 
+                                  <option value="<?php echo $jk['jenis_kelamin'] ?>"><?php echo $jk['jenis_kelamin'] ?></option>
+                                <?php endif ?>
+                              <?php endforeach ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="nama_file" class="label-font-register">Tanggal Lahir</label>
+                            <input type="date" class="form-control" name="tgl_lahir" id="nama_file" placeholder="Tanggal Lahir .." value="<?= $data_member->tgl_lahir ?>" required>
+                            <?= form_error('Nama_file', '<small class="text-danger">', '</small>'); ?>
+                        </div>
+                      </div>
                     </div>
-                <?php } ?>
-            </form>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg btn-block">
+                            Simpan ⭢
+                        </button>
+                    </div>
+                <?php echo form_close() ?>
             </div>
           </div>
         </div>
       </div>
 
- 

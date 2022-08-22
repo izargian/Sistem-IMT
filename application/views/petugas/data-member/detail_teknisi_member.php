@@ -120,5 +120,81 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="bg-white p-4 mt-4" style="border-radius:3px;box-shadow:rgba(0, 0, 0, 0.03) 0px 4px 8px 0px;">
+        <div class="table-responsive ">
+          <table id="example" class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No</th>
+                <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Usia</th> -->
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">B B</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">T B</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">rfid</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <?php $no = 1;
+              foreach ($data_imt as $value) : ?>
+                <tr>
+                  <td><?= $no++ ?></td>
+                  <td><?= $value->berat_badan ?></td>
+                  <td><?= $value->tinggi_badan ?></td>
+                  <td><?= $value->created ?></td>
+                  <td><?= $value->id_rfid ?></td>
+                </tr>
+              <?php endforeach ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
+
+<script>
+  $(document).ready(function() {
+    var url = '<?= base_url() ?>';
+    $.getJSON(url + 'petugas/change/data_member_teknisi/chart/<?= $this->uri->segment(5) ?>', function(response) {
+      var options = {
+        chart: {
+          height: 280,
+          type: "area"
+        },
+        dataLabels: {
+          enabled: false
+        },
+        series: [{
+            name: "Berat Badan",
+            data: response.berat_badan
+          },
+          {
+            name: "Tinggi Badan",
+            data: response.tinggi_badan
+          }
+        ],
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 90, 100]
+          }
+        },
+        xaxis: {
+          categories: response.tanggal
+        }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+      chart.render();
+    });
+
+  })
+</script>

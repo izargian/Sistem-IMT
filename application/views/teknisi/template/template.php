@@ -235,7 +235,6 @@
           </ol>
           <?php
           $instansi = $this->db->get_where('instansi', array('id' => $user['code_instansi']))->row();
-          var_dump($user['code_instansi'])
           ?>
           <h3 class="font-weight-bolder mb-0"><?= $user['jenis'] ?> <span class="h6 mx-3"><?= $instansi->instansi ?></span></h3>
         </nav>

@@ -209,7 +209,11 @@
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?= $user['jenis'] ?></li>
           </ol>
           <?php
+<<<<<<< HEAD
           $instansi = $this->db->get_where('instansi', array('id' => $user['code_instansi']))->row();
+=======
+          $instansi = $this->db->get_where('instansi', array('code_instansi' => $user['code_instansi']))->row();
+>>>>>>> f6602bf6a14e69fd9107c6e7e3919226ba4f9ab3
           ?>
           <h3 class="font-weight-bolder mb-0"><?= $user['jenis'] ?> <span class="h6 mx-3"><?= $instansi->instansi ?></span></h3>
         </nav>
@@ -463,6 +467,32 @@
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.0/dist/sweetalert2.all.min.js"></script>
+  <script>
+    function logout() {
+      let url = '<?= base_url('login/logout') ?>';
+      Swal.fire({
+        title: 'Peringatan',
+        text: "Apakah Anda Ingin Keluar?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "YA",
+        cancelButtonText: "BATAL",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            cache: "false",
+            success: function(response) {
+              window.location = "<?= base_url() ?>";
+            },
+          })
+        }
+      })
+    }
+  </script>
   <script>
     function logout() {
       let url = '<?= base_url('login/logout') ?>';
