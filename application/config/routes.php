@@ -53,7 +53,11 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Api
+// Api Arduino
 $route['api/v1/berat-badan'] = 'api/BeratBadan';
 $route['api/v1/tinggi-badan'] = 'api/TinggiBadan';
 $route['api/v1/rfid'] = 'api/Rfid';
+
+// Api Android
+$route['api/login'] = 'api/android/Login';
+$route['api/profil'] = 'api/android/Profil';
