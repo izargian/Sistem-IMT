@@ -73,7 +73,7 @@
                         <td><?= $value->created ?></td>
                         <td><?= $value->id_rfid ?></td>
                         <td>
-                          <a href="<?php echo site_url('petugas/change/data_member_teknisi/detail_teknisi_member/' . $value->id); ?>" class="btn btn-link text-success text-gradient px-3 mb-0">Detail ⭢</a>
+                          <!-- <a href="<?php echo site_url('petugas/change/data_member_teknisi/detail_teknisi_member/' . $value->id); ?>" class="btn btn-link text-success text-gradient px-3 mb-0">Detail ⭢</a> -->
 
                           <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:void(0)" data-url="<?= site_url('teknisi/change/data_imt_teknisi/delete_teknisi_imt/' . $value->id); ?>" onclick="hapus(this)"><i class="far fa-trash-alt me-2"></i></a>
 
