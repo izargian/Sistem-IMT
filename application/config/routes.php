@@ -61,3 +61,8 @@ $route['api/v1/rfid'] = 'api/Rfid';
 // Api Android
 $route['api/login'] = 'api/android/Login';
 $route['api/profil'] = 'api/android/Profil';
+$route['api/pasien'] = 'api/android/Pasien';
+$route['api/detail-pasien'] = 'api/android/Pasien/detail';
+$route['api/data-pengukuran'] = 'api/android/Pengukuran';
+$route['api/detail-pengukuran'] = 'api/android/Pengukuran/detail';
+$route['api/hapus-pengukuran'] = 'api/android/Pengukuran/hapus';
