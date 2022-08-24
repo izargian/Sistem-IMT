@@ -66,3 +66,4 @@ $route['api/detail-pasien'] = 'api/android/Pasien/detail';
 $route['api/data-pengukuran'] = 'api/android/Pengukuran';
 $route['api/detail-pengukuran'] = 'api/android/Pengukuran/detail';
 $route['api/hapus-pengukuran'] = 'api/android/Pengukuran/hapus';
+$route['api/instansi'] = 'api/android/Instansi';
