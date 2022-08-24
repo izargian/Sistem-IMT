@@ -168,6 +168,28 @@ class Data_member_teknisi extends CI_Controller
         }
     }
 
+    public function chart($id)
+    {
+        $this->db->select('data-imt.tinggi_badan, data-imt.berat_badan, data-imt.created');
+        $this->db->from('data-imt');
+        $this->db->where('id_member', $id);
+        $data = $this->db->get();
+        $result = $data->result();
+        $berat_badan = [];
+        $tinggi_badan = [];
+        $tanggal = [];
+        foreach ($result as $value) {
+            $berat_badan[] = $value->berat_badan;
+            $tinggi_badan[] = $value->tinggi_badan;
+            $tanggal[] = $value->created;
+        }
+        echo json_encode([
+            'berat_badan' => $berat_badan,
+            'tinggi_badan' => $tinggi_badan,
+            'tanggal' => $tanggal,
+        ]);
+    }
+
     public function jenis_kelamin()
     {
         $jenis_kelamin = [

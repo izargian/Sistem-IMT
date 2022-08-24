@@ -19,6 +19,11 @@ class Pemerintah extends CI_Controller {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
 
+        $data['total_pengukuran'] = $this->db->get('data-imt')->num_rows();
+        $data['total_member'] = $this->db->get('member')->num_rows();
+        $data['total_instansi'] = $this->db->get('instansi')->num_rows();
+        $data['total_user'] = $this->db->get('user')->num_rows();
+
         $data['view'] = 'pemerintah/dashboard';
         
         $this->load->view('pemerintah/template/template', $data);

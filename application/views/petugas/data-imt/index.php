@@ -73,11 +73,9 @@
                         <td><?= $value->created ?></td>
                         <td><?= $value->id_rfid ?></td>
                         <td>
-                          <!-- <a href="<?php echo site_url('petugas/change/data_member_teknisi/detail_teknisi_member/' . $value->id); ?>" class="btn btn-link text-success text-gradient px-3 mb-0">Detail ⭢</a> -->
+                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:void(0)" data-url="<?= site_url('petugas/change/data_imt_teknisi/delete_teknisi_imt/' . $value->id); ?>" onclick="hapus(this)"><i class="far fa-trash-alt me-2"></i></a>
 
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:void(0)" data-url="<?= site_url('teknisi/change/data_imt_teknisi/delete_teknisi_imt/' . $value->id); ?>" onclick="hapus(this)"><i class="far fa-trash-alt me-2"></i></a>
-
-                          <a class="btn btn-link text-primary px-3 mb-0" href="<?php echo site_url('teknisi/change/data_imt_teknisi/update_teknisi_imt/' . $value->id); ?>"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i></a>
+                          <a class="btn btn-link text-primary px-3 mb-0" href="<?php echo site_url('petugas/change/data_imt_teknisi/update_teknisi_imt/' . $value->id); ?>"><i class="fas fa-pencil-alt text-primary me-2" aria-hidden="true"></i></a>
                         </td>
                       </tr>
                     <?php endforeach ?>
@@ -90,3 +88,50 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function hapus(el) {
+      let url = $(el).data('url');
+      Swal.fire({
+        title: 'Peringatan',
+        text: "Apakah Anda Ingin Menghapus?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "YA",
+        cancelButtonText: "BATAL",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            cache: "false",
+            success: function(response) {
+              console.log(response)
+              Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: response.message,
+                showConfirmButton: false,
+                timer: 1500
+              }).then(function() {
+                location.reload();
+              })
+            },
+            error: function(respon) {
+              Swal.fire({
+                icon: 'warning',
+                title: 'Error',
+                text: response.responseJSON.message,
+                showConfirmButton: false,
+                dangerMode: true,
+                timer: 2000
+              });
+            }
+          });
+        }
+        return false;
+      });
+    }
+  </script>
