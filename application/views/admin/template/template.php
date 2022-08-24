@@ -208,7 +208,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="">
-                  <a class="dropdown-item border-radius-md" href="<?php echo site_url('teknisi/change/data_user_teknisi/update_teknisi_user/' .  $user['id']); ?>">
+                  <a class="dropdown-item border-radius-md" href="<?php echo site_url('admin/change/data_user_teknisi/update_teknisi_user/' .  $user['id']); ?>">
                     <div class="d-flex py-1">
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">

@@ -77,25 +77,46 @@ class Data_user_teknisi extends CI_Controller
             $gambarBaru = $this->upload->data('file_name');
             $this->db->set('photo', $gambarBaru);
 
-            $data = array(
-                'code_instansi' => $code_instansi,
-                'nama' => $nama,
-                'email' => $email,
-                'password' => $password,
-                'alamat' => $alamat,
-                'jenis' => $jenis,
-                'photo' => $gambarBaru,
-            );
+            if ($password == "") {
+                $data = array(
+                    'code_instansi' => $code_instansi,
+                    'nama' => $nama,
+                    'email' => $email,
+                    'alamat' => $alamat,
+                    'jenis' => $jenis,
+                    'photo' => $gambarBaru,
+                );
+            }else{
+                $data = array(
+                    'code_instansi' => $code_instansi,
+                    'nama' => $nama,
+                    'email' => $email,
+                    'password' => $password,
+                    'alamat' => $alamat,
+                    'jenis' => $jenis,
+                    'photo' => $gambarBaru,
+                );
+            }
         } else {
             echo $this->upload->display_errors();
-            $data = array(
-                'code_instansi' => $code_instansi,
-                'nama' => $nama,
-                'email' => $email,
-                'password' => $password,
-                'alamat' => $alamat,
-                'jenis' => $jenis,
-            );
+            if ($password == "") {
+                $data = array(
+                    'code_instansi' => $code_instansi,
+                    'nama' => $nama,
+                    'email' => $email,
+                    'alamat' => $alamat,
+                    'jenis' => $jenis,
+                );
+            }else{
+                $data = array(
+                    'code_instansi' => $code_instansi,
+                    'nama' => $nama,
+                    'email' => $email,
+                    'password' => $password,
+                    'alamat' => $alamat,
+                    'jenis' => $jenis,
+                );
+            }
         }
 
         $where = array(

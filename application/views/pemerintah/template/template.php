@@ -27,7 +27,7 @@
 
 <body class="g-sidenav-show  bg-gray-100">
 
-<!-- sidebar -->
+  <!-- sidebar -->
 
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
@@ -107,37 +107,15 @@
             <span class="nav-link-text ms-1">Data IMT</span>
           </a>
         </li>
-        
+
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
 
-        <!-- <li class="nav-item">
-          <a class="nav-link  " href="#">
-            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <title>customer-support</title>
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                    <g transform="translate(1716.000000, 291.000000)">
-                      <g transform="translate(1.000000, 0.000000)">
-                        <path class="color-background opacity-6" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
-                        <path class="color-background" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
-                        <path class="color-background" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
-                      </g>
-                    </g>
-                  </g>
-                </g>
-              </svg>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li> -->
-
         <li class="nav-item">
-          <a class="nav-link  " href="<?= base_url('login/logout') ?>">
+          <a class="nav-link  " href="javascript:void(0)" onclick="logout()">
             <div class="icon  icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <svg  width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -186,10 +164,10 @@
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?= $user['jenis'] ?></li>
-          </ol> 
+          </ol>
           <?php
-                        $instansi = $this->db->get_where('instansi', array('code_instansi' => $user['code_instansi']))->row();
-                      ?>
+          $instansi = $this->db->get_where('instansi', array('id' => $user['code_instansi']))->row();
+          ?>
           <h3 class="font-weight-bolder mb-0"><?= $user['jenis'] ?> <span class="h6 mx-3"><?= $instansi->instansi ?></span></h3>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -201,11 +179,35 @@
           </div>
 
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none"><?= $user['nama'] ?></span>
               </a>
+              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="">
+                  <a class="dropdown-item border-radius-md" href="<?php echo site_url('pemerintah/change/data_user_teknisi/update_teknisi_user/' .  $user['id']); ?>">
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold"><i class="fa fa-user me-sm-1"></i> Edit Profil</span>
+                        </h6>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="">
+                  <a class="dropdown-item border-radius-md" href="javascript:void(0)" onclick="logout()">
+                    <div class="d-flex py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1 text-danger">
+                          <span class="font-weight-bold"><i class="fa fa-sign-out me-sm-1"></i> Log Out</span>
+                        </h6>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
@@ -227,119 +229,119 @@
     </nav>
     <!-- End Navbar -->
 
-                    <?php
-                        $this->load->view($view);
-                    ?>
+    <?php
+    $this->load->view($view);
+    ?>
 
 
     <?php if ($this->session->flashdata('gagal')) : ?>
-                <script>
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Password tidak sama!',
-                        text: 'Gagal',
-                        showConfirmButton: false,
-                        timer: 4500
-                    })
-                </script>
-            <?php endif; ?>
+      <script>
+        Swal.fire({
+          icon: 'error',
+          title: 'Password tidak sama!',
+          text: 'Gagal',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
 
-            <?php if ($this->session->flashdata('success-changed')) : ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Change Password Success',
-                        text: 'Selamat !',
-                        showConfirmButton: false,
-                        timer: 4500
-                    })
-                </script>
-            <?php endif; ?>
+    <?php if ($this->session->flashdata('success-changed')) : ?>
+      <script>
+        Swal.fire({
+          icon: 'success',
+          title: 'Change Password Success',
+          text: 'Selamat !',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
 
-            <?php if ($this->session->flashdata('success-upload')) : ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'IMT Upload Success!',
-                        text: 'Selamat !',
-                        showConfirmButton: false,
-                        timer: 4500
-                    })
-                </script>
-            <?php endif; ?>
+    <?php if ($this->session->flashdata('success-upload')) : ?>
+      <script>
+        Swal.fire({
+          icon: 'success',
+          title: 'IMT Upload Success!',
+          text: 'Selamat !',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
 
-            <?php if ($this->session->flashdata('success-edit-profil')) : ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Profile Telah Dirubah!',
-                        text: ' data Profile berubah!',
-                        showConfirmButton: false,
-                        timer: 4500
-                    })
-                </script>
-            <?php endif; ?>
+    <?php if ($this->session->flashdata('success-edit-profil')) : ?>
+      <script>
+        Swal.fire({
+          icon: 'success',
+          title: 'Profile Telah Dirubah!',
+          text: ' data Profile berubah!',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
 
-            <?php if ($this->session->flashdata('success-edit')) : ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Data IMT Telah Dirubah!',
-                        text: ' data IMT berubah!',
-                        showConfirmButton: false,
-                        timer: 4500
-                    })
-                </script>
-            <?php endif; ?>
+    <?php if ($this->session->flashdata('success-edit')) : ?>
+      <script>
+        Swal.fire({
+          icon: 'success',
+          title: 'Data IMT Telah Dirubah!',
+          text: ' data IMT berubah!',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
 
-            <?php if ($this->session->flashdata('imt-delete')) : ?>
-                <script>
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'IMT Telah Dihapus!',
-                        text: 'Selamat data telah Dihapus!',
-                        showConfirmButton: false,
-                        timer: 4500
-                    })
-                </script>
-            <?php endif; ?>
+    <?php if ($this->session->flashdata('imt-delete')) : ?>
+      <script>
+        Swal.fire({
+          icon: 'success',
+          title: 'IMT Telah Dihapus!',
+          text: 'Selamat data telah Dihapus!',
+          showConfirmButton: false,
+          timer: 4500
+        })
+      </script>
+    <?php endif; ?>
 
 
 
 
 
     <footer class="footer pt-3  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="#" class="font-weight-bold" target="_blank">Creative Tim IMT</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
+              © <script>
+                document.write(new Date().getFullYear())
+              </script>,
+              made with <i class="fa fa-heart"></i> by
+              <a href="#" class="font-weight-bold" target="_blank">Creative Tim IMT</a>
+              for a better web.
             </div>
           </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item">
+                <a href="#" class="nav-link text-muted" target="_blank">Creative Tim</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link text-muted" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link text-muted" target="_blank">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link pe-0 text-muted" target="_blank">License</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </footer>
+      </div>
+    </footer>
     </div>
   </main>
 
@@ -417,6 +419,33 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.10.0/dist/sweetalert2.all.min.js"></script>
+  <script>
+    function logout() {
+      let url = '<?= base_url('login/logout') ?>';
+      Swal.fire({
+        title: 'Peringatan',
+        text: "Apakah Anda Ingin Keluar?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "YA",
+        cancelButtonText: "BATAL",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+      }).then((isConfirm) => {
+        if (isConfirm.value) {
+          $.ajax({
+            url: url,
+            type: 'POST',
+            cache: "false",
+            success: function(response) {
+              window.location = "<?= base_url() ?>";
+            },
+          })
+        }
+      })
+    }
+  </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -428,20 +457,20 @@
   </script>
   <script>
     $('.custom-file-input').on('change', function() {
-            let fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(fileName);
-        });
-        
+      let fileName = $(this).val().split('\\').pop();
+      $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+
     $(document).ready(function() {
-            $('#example').DataTable();
-        });
+      $('#example').DataTable();
+    });
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= base_url('assets/') ?>js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 
-  
+
 </body>
 
 </html>
