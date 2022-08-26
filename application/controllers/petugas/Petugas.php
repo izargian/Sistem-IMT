@@ -207,4 +207,15 @@ class Petugas extends CI_Controller
             }
         }
     }
+
+    public function data_saran()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' =>
+        $this->session->userdata('email')])->row_array();
+
+        $data['data_saran'] = $this->db->get('data_saran')->result();
+
+        $data['view'] = 'petugas/data-saran/index';
+        $this->load->view('petugas/template/template', $data);
+    }
 }

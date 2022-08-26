@@ -60,13 +60,13 @@
                         <td>
                           <?php
                           if (round($bmi, 2) < 18) {
-                            echo '<b>Kurus</b> <br> <a href="#">Tampilkan Saran</a>';
+                            echo '<b>Kurus</b> <br> <a href="'.base_url('petugas/change/data_saran/lihat_saran/?status_ideal=Kurus').'">Tampilkan Saran</a>';
                           } elseif (round($bmi, 2) >= 18 && round($bmi, 2) <= 25) {
-                            echo '<b>Normal</b> <br> <a href="#">Tampilkan Saran</a>';
+                            echo '<b>Normal</b> <br> <a href="'.base_url('petugas/change/data_saran/lihat_saran/?status_ideal=Normal').'">Tampilkan Saran</a>';
                           } elseif (round($bmi, 2) > 25 && round($bmi, 2) < 27) {
-                            echo '<b>Kegemukan</b> <br> <a href="#">Tampilkan Saran</a>';
+                            echo '<b>Kegemukan</b> <br> <a href="'.base_url('petugas/change/data_saran/lihat_saran/?status_ideal=Kegemukan').'">Tampilkan Saran</a>';
                           } else {
-                            echo '<b>Obesitas</b> <br> <a href="#">Tampilkan Saran</a>';
+                            echo '<b>Obesitas</b> <br> <a href="'.base_url('petugas/change/data_saran/lihat_saran/?status_ideal=Obesitas').'">Tampilkan Saran</a>';
                           }
                           ?>
                         </td>
