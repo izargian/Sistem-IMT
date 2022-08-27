@@ -83,7 +83,7 @@ class Data_member_teknisi extends CI_Controller
 
         $this->m_imt->update_data($where, $data, 'member');
         $this->session->set_flashdata('success-edit', 'berhasil');
-        redirect('teknisi/teknisi/data_member_teknisi');
+        redirect('petugas/petugas/data_member_teknisi');
     }
 
     public function delete_teknisi_member($id)
