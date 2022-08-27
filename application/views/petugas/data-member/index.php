@@ -15,9 +15,9 @@
               <h3 class="justify-content-start">Member Management</h3>
             </div>
 
-            <div class="col-6">
+            <!-- <div class="col-6">
               <a class="btn bg-gradient-primary  w-100 justify-content-end" href="<?= base_url('petugas/change/data_member_teknisi/tambah_teknisi_member') ?>" type="button">Tambah Data Member +</a>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="row">
