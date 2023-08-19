@@ -12,6 +12,16 @@ class M_imt extends CI_Model
         return $this->db->get('member');
     }
 
+    public function userByCode($code)
+    {
+        $this->db->select('id');
+        $this->db->from('user');
+        $this->db->where('code_alat', $code);
+
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function tampil_data_user()
     {
         return $this->db->get('user');

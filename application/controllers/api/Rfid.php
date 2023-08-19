@@ -17,8 +17,29 @@ class Rfid extends CI_Controller
 
     public function index()
     {
+        $code = $this->input->get('code');
+        if ($code != null) {
+            // $userId = $this->M_imt->userByCode($code);
+            $userId = $this->db->get_where('user', array('code_alat' => $code))->row();
+            if ($userId == null) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'data user belum terdafar'
+                ]);
+                return;
+            }
+            $userId = $userId->id;
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'proses gagal'
+            ]);
+            return;
+        }
+
         $data = [
             'value' => $this->input->get('value'),
+            'user_id' => $userId
         ];
         $insert = $this->db->insert('rfid', $data);
         if ($insert) {

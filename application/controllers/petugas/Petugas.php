@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Petugas extends CI_Controller {
+class Petugas extends CI_Controller
+{
 
     public function __construct()
     {
@@ -25,14 +26,16 @@ class Petugas extends CI_Controller {
     }
 
 
-	public function data_imt_teknisi()
+    public function data_imt_teknisi()
     {
         $this->load->model('m_imt');
 
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
+        $usergin = $this->session->userdata('id');
 
         $this->db->select('*');
+        $this->db->where('user_id', $usergin);
         $this->db->from('data-imt');
         $this->db->join('member', 'data-imt.id_member=member.id');
         $data_imt = $this->db->get();
@@ -61,10 +64,14 @@ class Petugas extends CI_Controller {
     {
         $data['user'] = $this->db->get_where('user', ['email' =>
         $this->session->userdata('email')])->row_array();
-
+        $usergin = $this->session->userdata('id');
         $sql_berat_badan = $this->db->get('pengukuran_berat_badan')->result();
         $sql_tinggi_badan = $this->db->get('pengukuran_tinggi_badan')->result();
-        $sql_rfid = $this->db->get('rfid')->result();
+        // $sql_rfid = $this->db->get('rfid')->result();
+
+        $sql_rfid =  $this->db->get_where('rfid', ['user_id' =>
+        $usergin])->result();
+
         $berat_badan = [];
         foreach ($sql_berat_badan as $value) {
             $berat_badan = $value->value;
@@ -87,8 +94,10 @@ class Petugas extends CI_Controller {
 
     public function insert()
     {
+
         $cek_member = $this->db->get_where('member', array('id_rfid' => $this->input->post('rf_id')));
-        if ($cek_member->num_rows() > 0 ) {
+        $usergin = $this->session->userdata('id');
+        if ($cek_member->num_rows() > 0) {
             $id_member = $cek_member->row();
             $data = [
                 'id_member' => $id_member->id,
@@ -98,13 +107,14 @@ class Petugas extends CI_Controller {
                 'created' => date('Y-m-d'),
             ];
             $insert = $this->db->insert('data-imt', $data);
-        }else{
+        } else {
             $data = [
                 'id_rfid' => $this->input->post('rf_id'),
                 'nama' => $this->input->post('nama'),
                 'jenis_kelamin' => $this->input->post('jenis_kelamin'),
                 'tgl_lahir' => $this->input->post('tgl_lahir'),
                 'code_instansi' => $this->input->post('code_instansi'),
+                'user_id' => $usergin
             ];
             $this->db->insert('member', $data);
             $id_member = $this->db->insert_id();
@@ -121,10 +131,9 @@ class Petugas extends CI_Controller {
         if ($insert) {
             $this->session->set_flashdata('success', 'Data berhasil ditambah!');
             redirect(base_url('petugas/petugas/data_imt_teknisi'));
-        }else{
+        } else {
             $this->session->set_flashdata('error', 'Data gagal ditambah!');
             redirect(base_url('petugas/petugas/tambah_data_imt'));
         }
     }
-   
 }
